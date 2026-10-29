@@ -13,19 +13,28 @@
     const toggle = document.querySelector('[data-nav-toggle]');
     const nav = document.querySelector('[data-nav]');
     if (!toggle || !nav) return;
-    const setOpen = (open) => {
+    const desktop = window.matchMedia('(min-width: 861px)');
+    const setOpen = (open, restoreFocus = false) => {
       nav.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? '关闭导航' : '打开导航');
       document.body.classList.toggle('nav-open', open);
+      if (!open && restoreFocus && nav.contains(document.activeElement) && toggle.getClientRects().length) {
+        toggle.focus();
+      }
     };
     toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
     nav.addEventListener('click', (event) => {
       if (event.target.closest('a')) setOpen(false);
     });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') setOpen(false, true);
     });
+    const onDesktop = (event) => {
+      if (event.matches) setOpen(false);
+    };
+    if (desktop.addEventListener) desktop.addEventListener('change', onDesktop);
+    else desktop.addListener(onDesktop);
   }
 
   function initStars() {
@@ -86,6 +95,14 @@
     let index = 0;
     let lastFocus = null;
 
+    const setInert = (on) => {
+      Array.from(document.body.children).forEach((el) => {
+        if (el === dialog || el.tagName === 'SCRIPT') return;
+        if (on) el.setAttribute('inert', '');
+        else el.removeAttribute('inert');
+      });
+    };
+
     const show = (nextIndex) => {
       index = (nextIndex + triggers.length) % triggers.length;
       const trigger = triggers[index];
@@ -93,12 +110,16 @@
       image.src = trigger.dataset.full || (thumb ? thumb.src : '');
       image.alt = trigger.dataset.caption || trigger.getAttribute('aria-label') || '获奖证书';
       caption.textContent = trigger.dataset.caption || '';
+      document.body.classList.add('lightbox-open');
+      setInert(true);
       dialog.classList.add('is-open');
       dialog.querySelector('.lightbox__close').focus();
     };
 
     const close = () => {
       dialog.classList.remove('is-open');
+      document.body.classList.remove('lightbox-open');
+      setInert(false);
       image.removeAttribute('src');
       if (lastFocus) lastFocus.focus();
     };
@@ -115,6 +136,20 @@
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) close();
     });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const buttons = Array.from(dialog.querySelectorAll('button:not([disabled])'));
+      if (!buttons.length) return;
+      const first = buttons[0];
+      const last = buttons[buttons.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
     document.addEventListener('keydown', (event) => {
       if (!dialog.classList.contains('is-open')) return;
       if (event.key === 'Escape') close();
@@ -124,10 +159,13 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    initHeader();
-    initNav();
-    initStars();
-    initReveal();
-    initLightbox();
+    [initHeader, initNav, initStars, initReveal, initLightbox].forEach((init) => {
+      try {
+        init();
+      } catch (error) {
+        console.error(error);
+        document.documentElement.classList.remove('js');
+      }
+    });
   });
 })();
