@@ -219,3 +219,42 @@
   .lightbox__next{right:16px}
   .lightbox__figure{padding-bottom:54px}
 }
+
+/* ---------- members page ---------- */
+.section__meta{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--gold-dark)}
+.section--dark .section__meta{color:var(--gold-soft)}
+.leadership-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.leader-card{position:relative;padding:22px;border:1px solid var(--line);background:#fff}
+.leader-card::before{content:'';position:absolute;left:-1px;top:-1px;width:24px;height:24px;border-top:2px solid var(--gold-dark);border-left:2px solid var(--gold-dark)}
+.leader-card__top{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--gold-dark)}
+.leader-card h3{margin:10px 0 7px;font-size:22px}
+.leader-card p{color:var(--muted);font-size:13px;line-height:1.7}
+.member-wall{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.member-wall__item{margin:0}
+.member-wall__item img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);background:#fff}
+.member-wall__item figcaption{margin-top:6px;font-size:10.5px;color:var(--muted);text-align:center}
+.member-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.member-card{display:flex;gap:14px;padding:16px;border:1px solid var(--line);background:#fff}
+.member-card__photo{flex:0 0 72px;width:72px;height:72px;border-radius:50%;overflow:hidden;background:var(--paper-2)}
+.member-card__photo img{width:100%;height:100%;object-fit:cover}
+.member-card__initial{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:var(--mono);font-weight:700;font-size:24px;color:var(--gold-dark)}
+.member-card__body{min-width:0}
+.member-card h3{font-size:17px;display:flex;gap:8px;align-items:baseline}
+.member-card__nick{font-family:var(--mono);font-size:9px;color:var(--muted);font-weight:400}
+.member-card__meta{font-size:11px;color:var(--gold-dark);margin-top:4px}
+.member-card__intro{font-size:12.5px;color:var(--muted);line-height:1.65;margin-top:7px}
+.member-card__awards{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.member-card__award{font-size:10.5px;border:1px solid var(--line);padding:3px 6px;color:var(--muted);background:var(--paper)}
+@media (max-width:1100px){
+  .member-wall{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:860px){
+  .leadership-grid{grid-template-columns:1fr 1fr}
+  .member-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .leadership-grid{grid-template-columns:1fr}
+  .member-wall{grid-template-columns:repeat(3,1fr)}
+  .member-card{align-items:flex-start}
+  .member-card__photo{flex-basis:58px;width:58px;height:58px}
+}
