@@ -185,7 +185,7 @@ ul,ol{margin:0;padding:0;list-style:none}
   position:relative;z-index:2;flex:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);
   align-items:center;gap:clamp(24px,5vw,72px);padding-block:clamp(28px,5vw,64px);
 }
-.hero__copy{max-width:660px}
+.hero__copy{max-width:660px;transform:translateY(var(--copyY,0px))}
 .hero__topbar{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   font-family:var(--mono);font-size:10px;letter-spacing:.2em;
@@ -220,12 +220,53 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 .hero__meta span::before{content:'·';margin-right:8px;color:var(--gold)}
 .hero__gate{
-  position:relative;justify-self:center;width:min(100%,470px);
+  position:relative;justify-self:center;width:min(100%,520px);
+  isolation:isolate;
+  transform:translate3d(var(--gx,0px),var(--gy,0px),0) scale(var(--gs,1));
+  will-change:transform;
   filter:drop-shadow(0 0 42px rgba(232,180,90,.12));
+}
+.hero__gate::before{
+  content:'';position:absolute;inset:-24%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 52% 48%,rgba(232,180,90,.2),transparent 46%),
+    radial-gradient(circle at 62% 38%,rgba(143,208,255,.15),transparent 54%);
+  filter:blur(26px);opacity:.85;animation:nebulaBreathe 9s ease-in-out infinite;
 }
 .gate-svg{width:100%;height:auto;overflow:visible}
 .gate-glow{animation:gatePulse 7s ease-in-out infinite}
+.gate__portal{animation:portalPulse 5.5s ease-in-out infinite}
+.gate__seam{animation:seamPulse 4.8s ease-in-out infinite}
+.gate__door{transform-box:fill-box;will-change:transform}
+.gate__door--left{transform-origin:left center;animation:gateOpenLeft 1.9s cubic-bezier(.2,.75,.25,1) .2s both}
+.gate__door--right{transform-origin:right center;animation:gateOpenRight 1.9s cubic-bezier(.2,.75,.25,1) .2s both}
 @keyframes gatePulse{0%,100%{opacity:.86}50%{opacity:1}}
+@keyframes gateOpenLeft{0%{transform:scaleX(1)}100%{transform:scaleX(.14)}}
+@keyframes gateOpenRight{0%{transform:scaleX(1)}100%{transform:scaleX(.14)}}
+@keyframes portalPulse{0%,100%{opacity:.72}50%{opacity:1}}
+@keyframes seamPulse{0%,100%{opacity:.78}50%{opacity:1}}
+@keyframes nebulaBreathe{0%,100%{opacity:.7;transform:scale(.98)}50%{opacity:1;transform:scale(1.04)}}
+
+.hero__canvas{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none}
+.hero__blueprint{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;opacity:.4}
+.bp-gear{fill:none;transform-box:fill-box;transform-origin:center;animation:gearSpin 110s linear infinite}
+.bp-gear--gold circle{stroke:var(--gold);stroke-width:1.4;stroke-opacity:.26}
+.bp-gear--cyan circle{stroke:var(--cyan);stroke-width:1.2;stroke-opacity:.22}
+.bp-gear circle:first-child{stroke-dasharray:7 9}
+.bp-gear--cyan{animation-duration:150s;animation-direction:reverse}
+.bp-circuit path{fill:none;stroke:var(--cyan);stroke-width:1;stroke-opacity:.18;stroke-dasharray:4 12;animation:circuitFlow 24s linear infinite}
+.bp-circuit circle{fill:var(--cyan);opacity:.28}
+.hero__orbits i{animation:orbitFloat 16s ease-in-out infinite}
+.hero__orbits i:nth-child(2){animation-delay:-5s}
+.hero__orbits i:nth-child(3){animation-delay:-9s}
+.hero__topbar b::before{
+  content:'';display:inline-block;width:5px;height:5px;margin-right:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 12px var(--gold);animation:signalPulse 2.4s ease-in-out infinite;
+}
+@keyframes gearSpin{to{transform:rotate(360deg)}}
+@keyframes circuitFlow{to{stroke-dashoffset:-160}}
+@keyframes orbitFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes signalPulse{0%,100%{opacity:.55;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 .hero__stats{
   position:relative;z-index:2;border-top:1px solid rgba(110,180,255,.16);
   background:rgba(4,7,15,.4);backdrop-filter:blur(8px);
@@ -418,7 +459,7 @@ ul,ol{margin:0;padding:0;list-style:none}
   .hero__inner{grid-template-columns:1fr;min-height:660px;align-items:start;padding-block:34px 44px}
   .hero__copy{position:relative;z-index:2;max-width:620px}
   .hero__topbar{margin-bottom:38px}
-  .hero__gate{display:none}
+  .hero__gate{display:block}
   .hero h1{font-size:clamp(56px,13vw,96px)}
   .hero__slogan{letter-spacing:.25em}
   .hero__stats-inner{grid-template-columns:1fr 1fr;gap:16px 0;padding-block:18px 6px}
@@ -486,4 +527,28 @@ ul,ol{margin:0;padding:0;list-style:none}
 
 @media print{
   .js [data-reveal]{opacity:1 !important;transform:none !important}
+}
+
+@media (max-width:860px){
+  .hero__gate{
+    position:absolute;z-index:0;right:-10%;top:7%;width:min(82vw,380px);
+    opacity:.3;pointer-events:none;
+    filter:blur(.3px) drop-shadow(0 0 34px rgba(232,180,90,.1));
+  }
+  .hero__gate .gate-svg text{display:none}
+  .hero__copy{position:relative;z-index:2}
+  .hero__blueprint{opacity:.16}
+  .hero__canvas{opacity:.55}
+}
+
+@media (max-width:640px){
+  .hero__gate{width:104vw;right:-24%;top:4%;opacity:.2}
+  .hero__blueprint{display:none}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero__canvas,.hero__blueprint{display:none}
+  .hero__gate{transform:none}
+  .hero__gate::before,.gate__portal,.gate__seam,.hero__orbits i,.bp-gear,.bp-circuit path,.hero__topbar b::before{animation:none !important}
+  .gate__door--left,.gate__door--right{animation:none !important;transform:scaleX(.14)}
 }

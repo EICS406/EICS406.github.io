@@ -14,6 +14,7 @@
 <meta property="og:site_name" content="精创寰宇社 EICS">
 <meta property="og:image" content="https://eics406.github.io/assets/img/og-cover.jpg">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/img/photos/lab-modeling-480.webp" imagesrcset="assets/img/photos/lab-modeling-480.webp 480w, assets/img/photos/lab-modeling-thumb.webp 800w, assets/img/photos/lab-modeling.webp 1080w" imagesizes="(max-width: 860px) 100vw, 560px">
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/pages.css">
 <script>document.documentElement.classList.add('js');</script>
@@ -61,8 +62,29 @@
 
 <main id="main" tabindex="-1">
   <section class="hero" aria-labelledby="hero-title">
-    <div class="starfield" data-stars="150" aria-hidden="true"></div>
+    <div class="starfield hero__starfield" data-stars="90" aria-hidden="true"></div>
+    <canvas class="hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
     <div class="hero__orbits" aria-hidden="true"><i></i><i></i><i></i></div>
+    <svg class="hero__blueprint" viewBox="0 0 1200 800" aria-hidden="true" focusable="false">
+      <g transform="translate(190 210)">
+        <g class="bp-gear bp-gear--gold">
+          <circle r="94"/><circle r="76"/><circle r="18"/><circle r="7"/>
+        </g>
+      </g>
+      <g transform="translate(1030 590)">
+        <g class="bp-gear bp-gear--cyan">
+          <circle r="64"/><circle r="49"/><circle r="12"/>
+        </g>
+      </g>
+      <g class="bp-circuit bp-circuit--a">
+        <path d="M0 560 H160 L220 500 H360"/>
+        <path d="M0 600 H120 L190 530 H300"/>
+        <path d="M1200 170 H1040 L980 230 H860"/>
+        <path d="M1200 220 H1080 L1010 290 H900"/>
+        <circle cx="360" cy="500" r="3"/><circle cx="300" cy="530" r="3"/>
+        <circle cx="860" cy="230" r="3"/><circle cx="900" cy="290" r="3"/>
+      </g>
+    </svg>
 
     <div class="container hero__inner">
       <div class="hero__copy">
@@ -94,6 +116,12 @@
               <stop offset="72%" stop-color="#2b7fa8" stop-opacity=".28"/>
               <stop offset="100%" stop-color="#04070f" stop-opacity="0"/>
             </radialGradient>
+            <radialGradient id="portal" cx="50%" cy="48%" r="64%">
+              <stop offset="0%" stop-color="#f3d39a" stop-opacity=".95"/>
+              <stop offset="34%" stop-color="#e8b45a" stop-opacity=".55"/>
+              <stop offset="70%" stop-color="#2b7fa8" stop-opacity=".26"/>
+              <stop offset="100%" stop-color="#04070f" stop-opacity="0"/>
+            </radialGradient>
             <linearGradient id="door" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#152846"/>
               <stop offset="55%" stop-color="#0a1528"/>
@@ -121,15 +149,21 @@
           <ellipse cx="280" cy="350" rx="196" ry="250" fill="none" stroke="#e8b45a" stroke-opacity=".16" stroke-dasharray="2 12"/>
           <g class="gate-glow">
             <rect x="112" y="82" width="336" height="536" fill="none" stroke="url(#edge)" stroke-width="2"/>
-            <rect x="120" y="90" width="320" height="520" fill="#04070f"/>
-            <path d="M120 90 L266 118 L266 606 L120 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="2"/>
-            <path d="M440 90 L294 118 L294 606 L440 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="2"/>
-            <rect x="266" y="118" width="28" height="488" fill="url(#seam)" opacity=".9" filter="url(#seamGlow)"/>
-            <rect x="276" y="118" width="8" height="488" fill="#f3d39a" opacity=".28" filter="url(#seamGlow)"/>
-            <path d="M266 118 L266 606" stroke="#f3d39a" stroke-width="2" opacity=".85"/>
-            <path d="M294 118 L294 606" stroke="#8fd0ff" stroke-width="2" opacity=".8"/>
-            <path d="M280 128 L280 596" stroke="#f3d39a" stroke-width="3" opacity=".55" filter="url(#seamGlow)"/>
-            <circle cx="280" cy="360" r="6" fill="#f3d39a"/>
+            <rect class="gate__portal" x="120" y="90" width="320" height="520" fill="url(#portal)"/>
+            <g class="gate__door gate__door--left">
+              <path d="M120 90 L266 118 L266 606 L120 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+            </g>
+            <g class="gate__door gate__door--right">
+              <path d="M440 90 L294 118 L294 606 L440 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+            </g>
+            <g class="gate__seam">
+              <rect x="266" y="118" width="28" height="488" fill="url(#seam)" opacity=".9" filter="url(#seamGlow)"/>
+              <rect x="276" y="118" width="8" height="488" fill="#f3d39a" opacity=".28" filter="url(#seamGlow)"/>
+              <path d="M266 118 L266 606" stroke="#f3d39a" stroke-width="2" opacity=".85"/>
+              <path d="M294 118 L294 606" stroke="#8fd0ff" stroke-width="2" opacity=".8"/>
+              <path d="M280 128 L280 596" stroke="#f3d39a" stroke-width="3" opacity=".55" filter="url(#seamGlow)"/>
+              <circle cx="280" cy="360" r="6" fill="#f3d39a"/>
+            </g>
           </g>
           <g fill="#dfe9ff">
             <circle cx="180" cy="170" r="1.5" opacity=".8"/><circle cx="352" cy="220" r="1.2" opacity=".7"/>
@@ -170,7 +204,7 @@
           <a class="section__link" href="about.html" style="margin-top:22px">关于社团</a>
         </div>
         <figure class="who__photo" data-reveal>
-          <img src="assets/img/photos/lab-modeling.webp" alt="成员在实验室讨论三维建模与结构方案" width="1080" height="810" loading="lazy" decoding="async">
+          <img src="assets/img/photos/lab-modeling.webp" alt="成员在实验室讨论三维建模与结构方案" width="1080" height="810" loading="eager" decoding="async" srcset="assets/img/photos/lab-modeling-480.webp 480w, assets/img/photos/lab-modeling-thumb.webp 800w, assets/img/photos/lab-modeling.webp 1080w" sizes="(max-width: 860px) 100vw, 560px" fetchpriority="high">
           <figcaption><span>实验室 · 三维建模与结构方案讨论</span><span>EICS / 406</span></figcaption>
         </figure>
       </div>
@@ -256,7 +290,7 @@
 
       <div class="what-grid">
         <article class="what-card" data-reveal>
-          <div class="what-card__media"><img src="assets/img/photos/pcb-class.webp" alt="新手村 PCB 设计培训现场" width="1080" height="810" loading="lazy" decoding="async"></div>
+          <div class="what-card__media"><img src="assets/img/photos/pcb-class.webp" alt="新手村 PCB 设计培训现场" width="1080" height="810" loading="lazy" decoding="async" srcset="assets/img/photos/pcb-class-480.webp 480w, assets/img/photos/pcb-class-thumb.webp 800w, assets/img/photos/pcb-class.webp 1080w" sizes="(max-width: 640px) 100vw, (max-width: 860px) 50vw, 380px"></div>
           <div class="what-card__body">
             <span class="what-card__kicker">01 / TRAINING</span>
             <h3>常态培养</h3>
@@ -265,7 +299,7 @@
           </div>
         </article>
         <article class="what-card" data-reveal>
-          <div class="what-card__media"><img src="assets/img/photos/prototype-01.webp" alt="参赛作品样机" width="1080" height="810" loading="lazy" decoding="async"></div>
+          <div class="what-card__media"><img src="assets/img/photos/prototype-01.webp" alt="参赛作品样机" width="1080" height="810" loading="lazy" decoding="async" srcset="assets/img/photos/prototype-01-480.webp 480w, assets/img/photos/prototype-01-thumb.webp 800w, assets/img/photos/prototype-01.webp 1080w" sizes="(max-width: 640px) 100vw, (max-width: 860px) 50vw, 380px"></div>
           <div class="what-card__body">
             <span class="what-card__kicker">02 / COMPETITION</span>
             <h3>竞赛转化</h3>
@@ -274,7 +308,7 @@
           </div>
         </article>
         <article class="what-card" data-reveal>
-          <div class="what-card__media"><img src="assets/img/photos/team-booth.webp" alt="参赛团队在展位前合影" width="1080" height="810" loading="lazy" decoding="async"></div>
+          <div class="what-card__media"><img src="assets/img/photos/team-booth.webp" alt="参赛团队在展位前合影" width="1080" height="810" loading="lazy" decoding="async" srcset="assets/img/photos/team-booth-480.webp 480w, assets/img/photos/team-booth-thumb.webp 800w, assets/img/photos/team-booth.webp 1080w" sizes="(max-width: 640px) 100vw, (max-width: 860px) 50vw, 380px"></div>
           <div class="what-card__body">
             <span class="what-card__kicker">03 / PROGRAM</span>
             <h3>品牌活动</h3>
@@ -301,19 +335,19 @@
 
       <div class="mosaic" data-reveal>
         <figure>
-          <img src="assets/img/photos/competition-team.webp" alt="第十三届北京市大学生机械创新设计大赛现场" width="1080" height="810" loading="lazy" decoding="async">
+          <img src="assets/img/photos/competition-team.webp" alt="第十三届北京市大学生机械创新设计大赛现场" width="1080" height="810" loading="lazy" decoding="async" srcset="assets/img/photos/competition-team-480.webp 480w, assets/img/photos/competition-team-thumb.webp 800w, assets/img/photos/competition-team.webp 1080w" sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 600px">
           <figcaption>第十三届北京市大学生机械创新设计大赛现场<small>2026.05 · BEIJING</small></figcaption>
         </figure>
         <figure>
-          <img src="assets/img/photos/lab-work.webp" alt="备赛期间的加工与装配" width="1080" height="810" loading="lazy" decoding="async">
+          <img src="assets/img/photos/lab-work.webp" alt="备赛期间的加工与装配" width="1080" height="810" loading="lazy" decoding="async" srcset="assets/img/photos/lab-work-480.webp 480w, assets/img/photos/lab-work-thumb.webp 800w, assets/img/photos/lab-work.webp 1080w" sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 600px">
           <figcaption>备赛期间的加工与装配<small>LAB · 406</small></figcaption>
         </figure>
         <figure>
-          <img src="assets/img/photos/pcb-mentor.webp" alt="学长带教 PCB 设计" width="1080" height="810" loading="lazy" decoding="async">
+          <img src="assets/img/photos/pcb-mentor.webp" alt="学长带教 PCB 设计" width="1080" height="810" loading="lazy" decoding="async" srcset="assets/img/photos/pcb-mentor-480.webp 480w, assets/img/photos/pcb-mentor-thumb.webp 800w, assets/img/photos/pcb-mentor.webp 1080w" sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 600px">
           <figcaption>新手村大冒险 · PCB 设计带教<small>2025.10 · PCB</small></figcaption>
         </figure>
         <figure>
-          <img src="assets/img/photos/prototype-03.webp" alt="参赛作品整机调试" width="1080" height="813" loading="lazy" decoding="async">
+          <img src="assets/img/photos/prototype-03.webp" alt="参赛作品整机调试" width="1080" height="813" loading="lazy" decoding="async" srcset="assets/img/photos/prototype-03-480.webp 480w, assets/img/photos/prototype-03-thumb.webp 800w, assets/img/photos/prototype-03.webp 1080w" sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 600px">
           <figcaption>参赛作品整机调试<small>PROTOTYPE · TEST</small></figcaption>
         </figure>
       </div>
