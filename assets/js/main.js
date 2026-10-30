@@ -213,8 +213,6 @@
     let raf = 0;
     let active = false;
     let last = 0;
-    let shooting = null;
-    let nextShoot = 0;
 
     const makeStars = () => {
       const rect = hero.getBoundingClientRect();
@@ -266,35 +264,6 @@
         ctx.fillStyle = color;
         ctx.fill();
       }
-      if (!shooting && time > nextShoot) {
-        const left = Math.random() > 0.5;
-        shooting = {
-          x: left ? -40 : width + 40,
-          y: 30 + Math.random() * height * 0.45,
-          vx: left ? 2.8 : -2.8,
-          vy: 1.15,
-          life: 1,
-        };
-        nextShoot = time + 9000 + Math.random() * 8000;
-      }
-      if (shooting) {
-        shooting.x += shooting.vx * dt * 0.07;
-        shooting.y += shooting.vy * dt * 0.07;
-        shooting.life -= dt * 0.00045;
-        const tailX = shooting.x - shooting.vx * 20;
-        const tailY = shooting.y - shooting.vy * 20;
-        const trail = ctx.createLinearGradient(shooting.x, shooting.y, tailX, tailY);
-        trail.addColorStop(0, 'rgba(232,238,247,0)');
-        trail.addColorStop(0.45, `rgba(223,233,255,${Math.max(0, shooting.life) * 0.8})`);
-        trail.addColorStop(1, 'rgba(143,208,255,0)');
-        ctx.strokeStyle = trail;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(shooting.x, shooting.y);
-        ctx.lineTo(tailX, tailY);
-        ctx.stroke();
-        if (shooting.life <= 0 || shooting.x < -120 || shooting.x > width + 120) shooting = null;
-      }
       raf = requestAnimationFrame(draw);
     };
 
@@ -312,7 +281,6 @@
     };
 
     makeStars();
-    nextShoot = performance.now() + 4500;
     if ('ResizeObserver' in window) {
       new ResizeObserver(makeStars).observe(hero);
     } else {

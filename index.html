@@ -110,70 +110,84 @@
       <div class="hero__gate" aria-hidden="false">
         <svg class="gate-svg" viewBox="0 0 560 700" role="img" aria-label="寰宇之门：双扇门向星空敞开">
           <defs>
-            <radialGradient id="nebula" cx="50%" cy="42%" r="55%">
-              <stop offset="0%" stop-color="#f3d39a" stop-opacity=".95"/>
-              <stop offset="38%" stop-color="#e8b45a" stop-opacity=".55"/>
-              <stop offset="72%" stop-color="#2b7fa8" stop-opacity=".28"/>
-              <stop offset="100%" stop-color="#04070f" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="portal" cx="50%" cy="48%" r="64%">
-              <stop offset="0%" stop-color="#f3d39a" stop-opacity=".95"/>
-              <stop offset="34%" stop-color="#e8b45a" stop-opacity=".55"/>
-              <stop offset="70%" stop-color="#2b7fa8" stop-opacity=".26"/>
+            <radialGradient id="nebula" cx="50%" cy="44%" r="62%">
+              <stop offset="0%" stop-color="#f6dca6" stop-opacity="1"/>
+              <stop offset="28%" stop-color="#e8b45a" stop-opacity=".72"/>
+              <stop offset="60%" stop-color="#3d8fc0" stop-opacity=".32"/>
               <stop offset="100%" stop-color="#04070f" stop-opacity="0"/>
             </radialGradient>
             <linearGradient id="door" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#152846"/>
-              <stop offset="55%" stop-color="#0a1528"/>
-              <stop offset="100%" stop-color="#050b16"/>
+              <stop offset="0%" stop-color="#1b345c"/>
+              <stop offset="52%" stop-color="#0c1b34"/>
+              <stop offset="100%" stop-color="#060d1c"/>
             </linearGradient>
             <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#f3d39a"/>
-              <stop offset="50%" stop-color="#e8b45a"/>
-              <stop offset="100%" stop-color="#9a6b1f"/>
+              <stop offset="0%" stop-color="#f6dca6"/>
+              <stop offset="45%" stop-color="#e8b45a"/>
+              <stop offset="100%" stop-color="#8a5e1a"/>
             </linearGradient>
-            <linearGradient id="seam" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#f3d39a"/>
-              <stop offset="42%" stop-color="#e8b45a"/>
-              <stop offset="100%" stop-color="#8fd0ff"/>
-            </linearGradient>
-            <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="18"/>
+            <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="16"/>
             </filter>
-            <filter id="seamGlow" x="-80%" y="-20%" width="260%" height="140%">
-              <feGaussianBlur stdDeviation="9"/>
+            <filter id="softSm" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="5"/>
             </filter>
           </defs>
-          <ellipse cx="280" cy="350" rx="240" ry="300" fill="url(#nebula)" opacity=".7" filter="url(#soft)"/>
-          <ellipse cx="280" cy="350" rx="238" ry="300" fill="none" stroke="#8fd0ff" stroke-opacity=".22" stroke-dasharray="4 10"/>
-          <ellipse cx="280" cy="350" rx="196" ry="250" fill="none" stroke="#e8b45a" stroke-opacity=".16" stroke-dasharray="2 12"/>
+          <ellipse cx="280" cy="350" rx="250" ry="300" fill="url(#nebula)" opacity=".5" filter="url(#soft)"/>
+          <ellipse cx="280" cy="350" rx="248" ry="300" fill="none" stroke="#8fd0ff" stroke-opacity=".18" stroke-width="1" stroke-dasharray="4 10"/>
+          <ellipse cx="280" cy="350" rx="200" ry="250" fill="none" stroke="#e8b45a" stroke-opacity=".14" stroke-width="1" stroke-dasharray="2 12"/>
           <g class="gate-glow">
-            <rect x="112" y="82" width="336" height="536" fill="none" stroke="url(#edge)" stroke-width="2"/>
-            <rect class="gate__portal" x="120" y="90" width="320" height="520" fill="url(#portal)"/>
+            <rect x="110" y="78" width="340" height="544" fill="none" stroke="url(#edge)" stroke-width="2.5"/>
+            <rect x="117" y="85" width="326" height="530" fill="none" stroke="#f3d39a" stroke-opacity=".35" stroke-width="1"/>
+            <g class="gate__portal">
+              <rect x="120" y="90" width="320" height="520" fill="url(#nebula)"/>
+              <g fill="#ffffff">
+                <circle cx="158" cy="156" r="1.4" opacity=".85"/><circle cx="206" cy="214" r="1" opacity=".7"/>
+                <circle cx="338" cy="178" r="1.2" opacity=".72"/><circle cx="384" cy="262" r="1" opacity=".62"/>
+                <circle cx="176" cy="418" r="1.3" opacity=".8"/><circle cx="362" cy="458" r="1.1" opacity=".68"/>
+                <circle cx="238" cy="522" r="1" opacity=".58"/><circle cx="318" cy="378" r=".9" opacity=".72"/>
+                <circle cx="150" cy="322" r=".8" opacity=".58"/><circle cx="402" cy="384" r="1" opacity=".6"/>
+                <circle cx="268" cy="250" r=".8" opacity=".65"/><circle cx="348" cy="520" r="1.1" opacity=".6"/>
+              </g>
+              <rect x="278" y="90" width="4" height="520" fill="#f3d39a" opacity=".45" filter="url(#softSm)"/>
+            </g>
             <g class="gate__door gate__door--left">
-              <path d="M120 90 L266 118 L266 606 L120 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+              <path d="M120 90 L280 116 L280 606 L120 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="1.6"/>
+              <path d="M142 178 L266 200" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
+              <path d="M142 348 L266 366" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
+              <path d="M142 500 L266 514" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
+              <path d="M280 116 L280 606" stroke="#f3d39a" stroke-width="3" opacity=".9"/>
+              <path d="M277 116 L277 606" stroke="#8fd0ff" stroke-width="7" opacity=".22" filter="url(#softSm)"/>
+              <circle cx="260" cy="358" r="5.5" fill="#e8b45a" stroke="#f6dca6" stroke-width="1"/>
+              <circle cx="260" cy="358" r="2.4" fill="#0c1b34"/>
             </g>
             <g class="gate__door gate__door--right">
-              <path d="M440 90 L294 118 L294 606 L440 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+              <path d="M440 90 L280 116 L280 606 L440 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="1.6"/>
+              <path d="M418 178 L294 200" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
+              <path d="M418 348 L294 366" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
+              <path d="M418 500 L294 514" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
+              <path d="M280 116 L280 606" stroke="#8fd0ff" stroke-width="3" opacity=".85"/>
+              <path d="M283 116 L283 606" stroke="#f3d39a" stroke-width="7" opacity=".22" filter="url(#softSm)"/>
+              <circle cx="300" cy="358" r="5.5" fill="#e8b45a" stroke="#f6dca6" stroke-width="1"/>
+              <circle cx="300" cy="358" r="2.4" fill="#0c1b34"/>
             </g>
-            <g class="gate__seam">
-              <rect x="266" y="118" width="28" height="488" fill="url(#seam)" opacity=".9" filter="url(#seamGlow)"/>
-              <rect x="276" y="118" width="8" height="488" fill="#f3d39a" opacity=".28" filter="url(#seamGlow)"/>
-              <path d="M266 118 L266 606" stroke="#f3d39a" stroke-width="2" opacity=".85"/>
-              <path d="M294 118 L294 606" stroke="#8fd0ff" stroke-width="2" opacity=".8"/>
-              <path d="M280 128 L280 596" stroke="#f3d39a" stroke-width="3" opacity=".55" filter="url(#seamGlow)"/>
-              <circle cx="280" cy="360" r="6" fill="#f3d39a"/>
+            <g stroke="#e8b45a" stroke-width="2" fill="none" opacity=".65">
+              <path d="M110 96 V78 H128"/>
+              <path d="M432 78 H450 V96"/>
+              <path d="M110 604 V622 H128"/>
+              <path d="M432 622 H450 V604"/>
             </g>
+            <g stroke="#8fd0ff" stroke-width="1" fill="none" opacity=".38">
+              <path d="M472 78 V622"/>
+              <path d="M466 78 H478"/>
+              <path d="M466 622 H478"/>
+            </g>
+            <text x="484" y="354" font-family="GeistMono, monospace" font-size="11" letter-spacing="2" fill="#8fd0ff" opacity=".42">406</text>
           </g>
-          <g fill="#dfe9ff">
-            <circle cx="180" cy="170" r="1.5" opacity=".8"/><circle cx="352" cy="220" r="1.2" opacity=".7"/>
-            <circle cx="220" cy="480" r="1.4" opacity=".75"/><circle cx="390" cy="510" r="1.2" opacity=".6"/>
-            <circle cx="258" cy="300" r="1" opacity=".9"/><circle cx="310" cy="410" r="1.3" opacity=".7"/>
-          </g>
-          <g font-family="GeistMono, monospace" font-size="12" letter-spacing="4" fill="#8fd0ff" opacity=".8">
-            <text x="112" y="62">EICS · GATE NO.406</text>
-            <text x="112" y="652">JINGONGLOU · BEIJING</text>
-            <text x="424" y="62" fill="#e8b45a">2019 → 2025</text>
+          <g font-family="GeistMono, monospace" font-size="11" letter-spacing="3.5" fill="#8fd0ff" opacity=".75">
+            <text x="110" y="60">EICS · GATE NO.406</text>
+            <text x="110" y="658">JINGONGLOU · BEIJING</text>
+            <text x="450" y="60" fill="#e8b45a" text-anchor="end">2019 → 2025</text>
           </g>
         </svg>
       </div>
