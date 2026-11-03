@@ -107,86 +107,124 @@
       </div>
 
       <div class="hero__gate" aria-hidden="false">
-        <svg class="gate-svg" viewBox="0 0 560 700" role="img" aria-label="寰宇之门：双扇门向星空敞开">
+        <svg class="gate-svg" viewBox="0 0 560 700" role="img" aria-label="寰宇之门：一道被金色光芒灌满的拱门，一个人影站在门槛前">
           <defs>
-            <radialGradient id="nebula" cx="50%" cy="44%" r="62%">
-              <stop offset="0%" stop-color="#f6dca6" stop-opacity="1"/>
-              <stop offset="28%" stop-color="#e8b45a" stop-opacity=".72"/>
-              <stop offset="60%" stop-color="#3d8fc0" stop-opacity=".32"/>
-              <stop offset="100%" stop-color="#04070f" stop-opacity="0"/>
+            <linearGradient id="rayGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#ffe0a8" stop-opacity=".46"/>
+              <stop offset="16%" stop-color="#ffbc5c" stop-opacity=".24"/>
+              <stop offset="52%" stop-color="#ff9c2e" stop-opacity=".07"/>
+              <stop offset="100%" stop-color="#ff9c2e" stop-opacity="0"/>
+            </linearGradient>
+            <radialGradient id="hallLight" cx="50%" cy="40%" r="52%">
+              <stop offset="0%" stop-color="#fffdf4"/>
+              <stop offset="12%" stop-color="#fff3d2"/>
+              <stop offset="30%" stop-color="#ffd37e"/>
+              <stop offset="50%" stop-color="#f9aa38"/>
+              <stop offset="72%" stop-color="#d8781a" stop-opacity=".7"/>
+              <stop offset="90%" stop-color="#8f4409" stop-opacity=".26"/>
+              <stop offset="100%" stop-color="#3d1c04" stop-opacity="0"/>
             </radialGradient>
-            <linearGradient id="door" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#1b345c"/>
-              <stop offset="52%" stop-color="#0c1b34"/>
-              <stop offset="100%" stop-color="#060d1c"/>
+            <linearGradient id="archEdge" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fff7e0"/>
+              <stop offset="42%" stop-color="#ffd58d"/>
+              <stop offset="100%" stop-color="#d1801f"/>
             </linearGradient>
-            <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#f6dca6"/>
-              <stop offset="45%" stop-color="#e8b45a"/>
-              <stop offset="100%" stop-color="#8a5e1a"/>
+            <linearGradient id="floorSpill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffcf85" stop-opacity=".45"/>
+              <stop offset="100%" stop-color="#ffcf85" stop-opacity="0"/>
             </linearGradient>
-            <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="16"/>
+            <filter id="rayBlur" x="-45%" y="-45%" width="190%" height="190%">
+              <feGaussianBlur stdDeviation="14"/>
+            </filter>
+            <filter id="bloom" x="-70%" y="-70%" width="240%" height="240%">
+              <feGaussianBlur stdDeviation="22"/>
             </filter>
             <filter id="softSm" x="-60%" y="-60%" width="220%" height="220%">
               <feGaussianBlur stdDeviation="5"/>
             </filter>
+            <clipPath id="archClip">
+              <path d="M228 604 L228 148 A72 72 0 0 1 372 148 L372 604 Z"/>
+            </clipPath>
           </defs>
-          <ellipse cx="280" cy="350" rx="250" ry="300" fill="url(#nebula)" opacity=".5" filter="url(#soft)"/>
-          <ellipse cx="280" cy="350" rx="248" ry="300" fill="none" stroke="#8fd0ff" stroke-opacity=".18" stroke-width="1" stroke-dasharray="4 10"/>
-          <ellipse cx="280" cy="350" rx="200" ry="250" fill="none" stroke="#e8b45a" stroke-opacity=".14" stroke-width="1" stroke-dasharray="2 12"/>
-          <g class="gate-glow">
-            <rect x="110" y="78" width="340" height="544" fill="none" stroke="url(#edge)" stroke-width="2.5"/>
-            <rect x="117" y="85" width="326" height="530" fill="none" stroke="#f3d39a" stroke-opacity=".35" stroke-width="1"/>
-            <g class="gate__portal">
-              <rect x="120" y="90" width="320" height="520" fill="url(#nebula)"/>
-              <g fill="#ffffff">
-                <circle cx="158" cy="156" r="1.4" opacity=".85"/><circle cx="206" cy="214" r="1" opacity=".7"/>
-                <circle cx="338" cy="178" r="1.2" opacity=".72"/><circle cx="384" cy="262" r="1" opacity=".62"/>
-                <circle cx="176" cy="418" r="1.3" opacity=".8"/><circle cx="362" cy="458" r="1.1" opacity=".68"/>
-                <circle cx="238" cy="522" r="1" opacity=".58"/><circle cx="318" cy="378" r=".9" opacity=".72"/>
-                <circle cx="150" cy="322" r=".8" opacity=".58"/><circle cx="402" cy="384" r="1" opacity=".6"/>
-                <circle cx="268" cy="250" r=".8" opacity=".65"/><circle cx="348" cy="520" r="1.1" opacity=".6"/>
-              </g>
-              <rect x="278" y="90" width="4" height="520" fill="#f3d39a" opacity=".45" filter="url(#softSm)"/>
-            </g>
-            <g class="gate__door gate__door--left">
-              <path d="M120 90 L280 116 L280 606 L120 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="1.6"/>
-              <path d="M142 178 L266 200" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
-              <path d="M142 348 L266 366" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
-              <path d="M142 500 L266 514" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
-              <path d="M280 116 L280 606" stroke="#f3d39a" stroke-width="3" opacity=".9"/>
-              <path d="M277 116 L277 606" stroke="#8fd0ff" stroke-width="7" opacity=".22" filter="url(#softSm)"/>
-              <circle cx="260" cy="358" r="5.5" fill="#e8b45a" stroke="#f6dca6" stroke-width="1"/>
-              <circle cx="260" cy="358" r="2.4" fill="#0c1b34"/>
-            </g>
-            <g class="gate__door gate__door--right">
-              <path d="M440 90 L280 116 L280 606 L440 610 Z" fill="url(#door)" stroke="url(#edge)" stroke-width="1.6"/>
-              <path d="M418 178 L294 200" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
-              <path d="M418 348 L294 366" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
-              <path d="M418 500 L294 514" stroke="#e8b45a" stroke-opacity=".32" stroke-width="1" fill="none"/>
-              <path d="M280 116 L280 606" stroke="#8fd0ff" stroke-width="3" opacity=".85"/>
-              <path d="M283 116 L283 606" stroke="#f3d39a" stroke-width="7" opacity=".22" filter="url(#softSm)"/>
-              <circle cx="300" cy="358" r="5.5" fill="#e8b45a" stroke="#f6dca6" stroke-width="1"/>
-              <circle cx="300" cy="358" r="2.4" fill="#0c1b34"/>
-            </g>
-            <g stroke="#e8b45a" stroke-width="2" fill="none" opacity=".65">
-              <path d="M110 96 V78 H128"/>
-              <path d="M432 78 H450 V96"/>
-              <path d="M110 604 V622 H128"/>
-              <path d="M432 622 H450 V604"/>
-            </g>
-            <g stroke="#8fd0ff" stroke-width="1" fill="none" opacity=".38">
-              <path d="M472 78 V622"/>
-              <path d="M466 78 H478"/>
-              <path d="M466 622 H478"/>
-            </g>
-            <text x="484" y="354" font-family="GeistMono, monospace" font-size="11" letter-spacing="2" fill="#8fd0ff" opacity=".42">406</text>
+
+          <!-- 深空中的棱面结构 -->
+          <g class="gate__facets">
+            <path d="M206 152 L64 -44 L-14 -44 L180 180 Z"/>
+            <path d="M262 78 L214 -44 L288 -44 L296 76 Z"/>
+            <path d="M340 76 L326 -44 L400 -44 L352 84 Z"/>
+            <path d="M396 150 L518 -44 L574 -44 L412 180 Z"/>
+            <path d="M224 430 L60 704 L-14 704 L200 470 Z"/>
+            <path d="M376 432 L512 704 L460 704 L360 470 Z"/>
           </g>
+
+          <!-- 门内溢出的光束 -->
+          <g class="gate__rays" filter="url(#rayBlur)">
+            <g id="raySet">
+              <rect x="300" y="288" width="420" height="24" fill="url(#rayGrad)" transform="rotate(-48 300 300) translate(95 0)"/>
+              <rect x="300" y="294" width="380" height="14" fill="url(#rayGrad)" transform="rotate(-30 300 300) translate(95 0)"/>
+              <rect x="300" y="296" width="320" height="10" fill="url(#rayGrad)" transform="rotate(-13 300 300) translate(95 0)"/>
+              <rect x="300" y="294" width="320" height="13" fill="url(#rayGrad)" transform="rotate(9 300 300) translate(95 0)"/>
+              <rect x="300" y="290" width="360" height="18" fill="url(#rayGrad)" transform="rotate(27 300 300) translate(95 0)"/>
+              <rect x="300" y="283" width="400" height="28" fill="url(#rayGrad)" transform="rotate(45 300 300) translate(95 0)"/>
+            </g>
+            <use href="#raySet" transform="translate(600 0) scale(-1 1)"/>
+          </g>
+
+          <!-- 门外弥散光晕 -->
+          <ellipse class="gate__halo" cx="300" cy="300" rx="238" ry="272" fill="url(#hallLight)" opacity=".24" filter="url(#bloom)"/>
+
+          <!-- 拱门：门内不是房间，而是一整片倾泻的光 -->
+          <g class="gate__arch">
+            <path d="M228 604 L228 148 A72 72 0 0 1 372 148 L372 604 Z" fill="none" stroke="#ffd38a" stroke-opacity=".26" stroke-width="22" filter="url(#bloom)"/>
+            <path d="M228 604 L228 148 A72 72 0 0 1 372 148 L372 604 Z" fill="url(#hallLight)"/>
+            <g clip-path="url(#archClip)">
+              <ellipse cx="300" cy="248" rx="86" ry="124" fill="#fff8e6" opacity=".26" filter="url(#bloom)"/>
+              <g fill="#fff4d8">
+                <circle cx="262" cy="182" r="1.6" opacity=".72"/><circle cx="330" cy="162" r="1.1" opacity=".58"/>
+                <circle cx="350" cy="228" r="1.3" opacity=".68"/><circle cx="248" cy="256" r="1" opacity=".52"/>
+                <circle cx="312" cy="302" r="1.4" opacity=".76"/><circle cx="268" cy="352" r="1.1" opacity=".58"/>
+                <circle cx="344" cy="392" r="1.2" opacity=".62"/><circle cx="286" cy="438" r="1" opacity=".5"/>
+                <circle cx="252" cy="472" r="1.3" opacity=".54"/><circle cx="356" cy="502" r="1" opacity=".44"/>
+              </g>
+              <rect x="228" y="604" width="144" height="56" fill="url(#floorSpill)"/>
+            </g>
+            <path d="M228 604 L228 148 A72 72 0 0 1 372 148 L372 604" fill="none" stroke="url(#archEdge)" stroke-width="3.2"/>
+            <path d="M235 604 L235 150 A65 65 0 0 1 365 150 L365 604" fill="none" stroke="#fff7e0" stroke-opacity=".5" stroke-width="1"/>
+          </g>
+
+          <!-- 门槛上溢出的光 -->
+          <ellipse cx="300" cy="608" rx="170" ry="22" fill="#ffc978" opacity=".26" filter="url(#softSm)"/>
+
+          <!-- 人影：站在光的边缘 -->
+          <g class="gate__figure">
+            <ellipse cx="330" cy="606" rx="18" ry="4.5" fill="#08152b" opacity=".5" filter="url(#softSm)"/>
+            <g fill="#08152b">
+              <circle cx="330" cy="529" r="7"/>
+              <path d="M322.6 540 L337.4 540 L339.4 560 L338 578 L322 578 L320.6 560 Z"/>
+              <path d="M323.4 578 L328 578 L326.6 604 L322.2 604 Z"/>
+              <path d="M332 578 L336.6 578 L337.8 604 L333.4 604 Z"/>
+              <path d="M322.6 542 L319.4 566 L322.4 566.6 L325.8 543 Z"/>
+              <path d="M337.4 542 L340.6 566 L337.6 566.6 L334.2 543 Z"/>
+            </g>
+          </g>
+
+          <!-- 工程标注 -->
+          <g stroke="#e8b45a" stroke-width="2" fill="none" opacity=".6">
+            <path d="M186 106 V88 H204"/>
+            <path d="M396 88 H414 V106"/>
+            <path d="M186 586 V604 H204"/>
+            <path d="M396 604 H414 V586"/>
+          </g>
+          <g stroke="#8fd0ff" stroke-width="1" fill="none" opacity=".36">
+            <path d="M444 88 V604"/>
+            <path d="M438 88 H450"/>
+            <path d="M438 604 H450"/>
+          </g>
+          <text x="456" y="352" font-family="GeistMono, monospace" font-size="11" letter-spacing="2" fill="#8fd0ff" opacity=".42">406</text>
           <g font-family="GeistMono, monospace" font-size="11" letter-spacing="3.5" fill="#8fd0ff" opacity=".75">
-            <text x="110" y="60">EICS · GATE NO.406</text>
-            <text x="110" y="658">JINGONGLOU · BEIJING</text>
-            <text x="450" y="60" fill="#e8b45a" text-anchor="end">2019 → 2025</text>
+            <text x="186" y="70">EICS · GATE NO.406</text>
+            <text x="186" y="638">JINGONGLOU · BEIJING</text>
+            <text x="414" y="70" fill="#e8b45a" text-anchor="end">2019 → 2025</text>
           </g>
         </svg>
       </div>

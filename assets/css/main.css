@@ -161,6 +161,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .hero{
   position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
   background:
+    radial-gradient(700px 640px at 71% 42%,rgba(24,74,158,.28),transparent 66%),
+    radial-gradient(780px 660px at 72% 40%,rgba(190,112,28,.15),transparent 64%),
     radial-gradient(1100px 700px at 50% -8%,#0c1730 0%,rgba(16,32,60,0) 62%),
     radial-gradient(900px 600px at 50% 34%,#081430 0%,rgba(11,26,54,0) 70%),
     radial-gradient(1400px 900px at 50% 108%,#050d1c 0%,rgba(7,18,39,0) 70%),
@@ -230,20 +232,21 @@ ul,ol{margin:0;padding:0;list-style:none}
 .hero__gate::before{
   content:'';position:absolute;inset:-30%;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(circle at 52% 48%,rgba(232,180,90,.24),transparent 48%),
-    radial-gradient(circle at 62% 38%,rgba(143,208,255,.16),transparent 56%);
+    radial-gradient(circle at 52% 44%,rgba(255,196,106,.26),transparent 46%),
+    radial-gradient(circle at 64% 34%,rgba(143,208,255,.13),transparent 56%);
   filter:blur(26px);opacity:.9;animation:nebulaBreathe 9s ease-in-out infinite;
 }
-.gate-svg{width:100%;height:auto;overflow:visible}
-.gate-glow{animation:gatePulse 7s ease-in-out infinite}
-.gate__portal{animation:portalPulse 5.5s ease-in-out infinite}
-.gate__door{will-change:transform}
-.gate__door--left{animation:gateOpenLeft 2.4s cubic-bezier(.2,.75,.25,1) .2s both}
-.gate__door--right{animation:gateOpenRight 2.4s cubic-bezier(.2,.75,.25,1) .2s both}
-@keyframes gatePulse{0%,100%{opacity:.86}50%{opacity:1}}
-@keyframes gateOpenLeft{0%{transform:translateX(0)}100%{transform:translateX(-56px)}}
-@keyframes gateOpenRight{0%{transform:translateX(0)}100%{transform:translateX(56px)}}
-@keyframes portalPulse{0%,100%{opacity:.72}50%{opacity:1}}
+.gate-svg{width:100%;height:auto;overflow:hidden}
+.gate__facets path{
+  fill:rgba(143,208,255,.045);stroke:rgba(143,208,255,.14);stroke-width:1;
+}
+.gate__rays{opacity:.85;animation:rayBreathe 12s ease-in-out infinite}
+.gate__halo{animation:nebulaBreathe 9s ease-in-out infinite}
+.gate__arch{animation:gatePulse 7s ease-in-out infinite}
+.gate__figure{animation:figureFade 6s ease-in-out infinite}
+@keyframes gatePulse{0%,100%{opacity:.9}50%{opacity:1}}
+@keyframes rayBreathe{0%,100%{opacity:.6}50%{opacity:.95}}
+@keyframes figureFade{0%,100%{opacity:.9}50%{opacity:1}}
 @keyframes nebulaBreathe{0%,100%{opacity:.7;transform:scale(.98)}50%{opacity:1;transform:scale(1.04)}}
 
 .hero__canvas{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none}
@@ -520,7 +523,7 @@ ul,ol{margin:0;padding:0;list-style:none}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
   .js [data-reveal]{opacity:1;transform:none}
-  .gate-glow{animation:none}
+  .gate__rays,.gate__halo,.gate__arch,.gate__figure{animation:none}
   .starfield i{animation:none;opacity:.6}
 }
 
@@ -535,7 +538,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media (max-width:860px){
   .hero__gate{
     position:absolute;z-index:0;right:-10%;top:7%;width:min(82vw,380px);
-    opacity:.3;pointer-events:none;
+    opacity:.34;pointer-events:none;
     filter:blur(.3px) drop-shadow(0 0 34px rgba(232,180,90,.1));
   }
   .hero__gate .gate-svg text{display:none}
@@ -545,14 +548,12 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 
 @media (max-width:640px){
-  .hero__gate{width:104vw;right:-24%;top:4%;opacity:.2}
+  .hero__gate{width:104vw;right:-24%;top:4%;opacity:.28}
   .hero__blueprint{display:none}
 }
 
 @media (prefers-reduced-motion: reduce){
   .hero__canvas,.hero__blueprint{display:none}
   .hero__gate{transform:none}
-  .hero__gate::before,.gate__portal,.hero__orbits i,.bp-gear,.bp-circuit path,.hero__topbar b::before{animation:none !important}
-  .gate__door--left{animation:none !important;transform:translateX(-56px)}
-  .gate__door--right{animation:none !important;transform:translateX(56px)}
+  .hero__gate::before,.gate__rays,.gate__halo,.gate__arch,.gate__figure,.hero__orbits i,.bp-gear,.bp-circuit path,.hero__topbar b::before{animation:none !important}
 }
